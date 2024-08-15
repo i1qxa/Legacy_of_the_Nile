@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.loading.LoadingActivity">
 
     <ImageView
         android:layout_width="0dp"
@@ -14,19 +14,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/game_bckgr"
+        android:src="@drawable/loading_bckgr"
         android:scaleType="centerCrop"
         />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mainConteiner"
+    <ProgressBar
+        android:id="@+id/pbLoading"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="364:24"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_loading"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvLoading"
+        app:layout_constraintWidth_percent="0.85"
+        />
+
+    <TextView
+        android:id="@+id/tvLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:name="com.Legacy.ofthe.Nile.ui.main.start.StartGameFragment"
+        android:layout_marginBottom="20dp"
+        android:text="@string/loading"
+        android:fontFamily="@font/main_font"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

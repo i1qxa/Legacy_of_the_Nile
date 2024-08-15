@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Legacy of the Nile</string>
+    <string name="loading">LOADING</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exit">EXIT</string>
+    <string name="play">PLAY</string>
 </resources>
