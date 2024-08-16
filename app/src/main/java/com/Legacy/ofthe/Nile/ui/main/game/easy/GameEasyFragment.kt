@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.Legacy.ofthe.Nile.R
 import com.Legacy.ofthe.Nile.databinding.FragmentGameEasyBinding
 import com.Legacy.ofthe.Nile.ui.loading.LoadingViewModel
+import com.Legacy.ofthe.Nile.ui.main.settings.SettingsFragment
+import com.Legacy.ofthe.Nile.ui.main.start.StartGameFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,6 +42,20 @@ class GameEasyFragment : Fragment() {
     private fun setupBtnClickListeners(){
         binding.btnMix.setOnClickListener {
             viewModel.mixGameItems()
+        }
+        binding.btnToStart.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, StartGameFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+        binding.btnSettings.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, SettingsFragment())
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 
