@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.exit.ExitFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hor50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <TextView
+        android:id="@+id/tvExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnYes"
+        android:layout_marginTop="20dp"
+        style="@style/my_text_style"
+        android:text="EXIT"
+        android:gravity="center"
+        android:textSize="60dp"
+        />
+
+    <TextView
+        android:id="@+id/btnYes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintDimensionRatio="266:67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hor50"
+        android:layout_marginBottom="15dp"
+        style="@style/my_text_style"
+        android:background="@drawable/btn_yellow_bckgr"
+        android:text="@string/yes"
+        android:gravity="center"
+        android:textSize="30dp"
+        />
+
+    <TextView
+        android:id="@+id/btnNo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintDimensionRatio="266:67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hor50"
+        android:layout_marginTop="15dp"
+        style="@style/my_text_style"
+        android:background="@drawable/btn_red_bckgr"
+        android:text="@string/no"
+        android:gravity="center"
+        android:textSize="30dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

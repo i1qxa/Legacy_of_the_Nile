@@ -5,4 +5,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit">EXIT</string>
     <string name="play">PLAY</string>
+    <string name="rules">Rules</string>
+    <string name="rules_description">The main goal of the game is to establish the correct sequence. Elements appear on the screen, the sequence of which must be remembered, then they are mixed and the player must restore the correct sequence.</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="options">Options</string>
+    <string name="volume">VOLUME</string>
+    <string name="sound">SOUND</string>
+    <string name="start">START</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="middle">MIDDLE</string>
+    <string name="easy">EASY</string>
+    <string name="hard">HARD</string>
+    <string name="remember_the_sequence">REMEMBER THE SEQUENCE</string>
+    <string name="mix">MIX</string>
 </resources>

@@ -14,7 +14,7 @@ class LoadingViewModel:ViewModel() {
         var progress = 0
         viewModelScope.launch {
             while (progress<=100){
-                delay(50)
+                delay(20)
                 progressLD.postValue(progress)
                 progress++
             }
