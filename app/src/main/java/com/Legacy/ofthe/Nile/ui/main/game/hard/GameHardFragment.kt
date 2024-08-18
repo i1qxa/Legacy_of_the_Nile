@@ -1,60 +1,187 @@
 package com.Legacy.ofthe.Nile.ui.main.game.hard
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.Legacy.ofthe.Nile.R
+import com.Legacy.ofthe.Nile.data.MoveDirections
+import com.Legacy.ofthe.Nile.data.PREFS_NAME
+import com.Legacy.ofthe.Nile.data.VOLUME_PREFS
+import com.Legacy.ofthe.Nile.databinding.FragmentGameHardBinding
+import com.Legacy.ofthe.Nile.ui.main.game.easy.EasyViewModel
+import com.Legacy.ofthe.Nile.ui.main.game_result.GameResultFragment
+import com.Legacy.ofthe.Nile.ui.main.settings.SettingsFragment
+import com.Legacy.ofthe.Nile.ui.main.start.StartGameFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class GameHardFragment : Fragment(), OnTouchListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameHardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class GameHardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val binding by lazy { FragmentGameHardBinding.inflate(layoutInflater) }
+    private val viewModel by viewModels<EasyViewModel>()
+    private val listOfGameItemViews by lazy {
+        listOf(
+            binding.item1,
+            binding.item2,
+            binding.item3,
+            binding.item4,
+            binding.item5,
+            binding.item6,
+            binding.item7,
+            binding.item8,
+        )
     }
+    private var xStart = 0F
+    private var xEnd = 0F
+    private var yStart = 0F
+    private var yEnd = 0F
+    private var viewSwiped: ImageView? = null
+    private var mMediaPlayer: MediaPlayer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_hard, container, false)
+    ): View {
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GameHardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GameHardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            delay(200)
+            viewModel.setupGameItemImgResources(listOfGameItemViews, 3)
+            setupBtnClickListeners()
+        }
+        observeGameStart()
+        observePlayMoveSound()
+        observeGameResult()
+    }
+
+    private fun stopSound() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer!!.stop()
+            mMediaPlayer!!.release()
+            mMediaPlayer = null
+        }
+    }
+
+
+    private fun playSound() {
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(requireContext(), R.raw.move_card_sound)
+            mMediaPlayer!!.isLooping = false
+            mMediaPlayer!!.start()
+        } else mMediaPlayer!!.start()
+    }
+
+    private fun observePlayMoveSound(){
+        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        if(prefs.getBoolean(VOLUME_PREFS, true)){
+            viewModel.playMoveCardSoundLD.observe(viewLifecycleOwner){
+                if (it){
+                    stopSound()
+                    playSound()
                 }
             }
+        }
+    }
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        v?.performClick()
+        if (v in listOfGameItemViews) {
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    xStart = event.x
+                    yStart = event.y
+                    viewSwiped = v as ImageView
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    xEnd = event.x
+                    yEnd = event.y
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    val xDiff = xEnd - xStart
+                    val yDiff = yEnd - yStart
+                    val xMod = if (xDiff < 0) xDiff * (-1) else xDiff
+                    val yMod = if (yDiff < 0) yDiff * (-1) else yDiff
+                    val moveDirection = if (xMod > yMod) {
+                        if (xDiff < 0) MoveDirections.LEFT
+                        else MoveDirections.RIGHT
+                    } else {
+                        if (yDiff < 0) MoveDirections.UP
+                        else MoveDirections.DAWN
+                    }
+                    xStart = 0F
+                    xEnd = 0F
+                    yStart = 0F
+                    yEnd = 0F
+                    viewSwiped?.let { viewModel.moveCard(moveDirection, it) }
+                    viewSwiped = null
+                }
+            }
+        }
+        return true
+    }
+
+    private fun observeGameStart() {
+        viewModel.isGameStartedLD.observe(viewLifecycleOwner) {
+            binding.tvGameHint.text = getString(R.string.make_the_right_sequence)
+            binding.btnMix.text = getString(R.string.done)
+            setOnTouchListener()
+        }
+        viewModel.timerLD.observe(viewLifecycleOwner) {
+            binding.tvTimer.text = convertIntToTime(it)
+        }
+    }
+
+    private fun observeGameResult() {
+        viewModel.gameResultLD.observe(viewLifecycleOwner) {
+            val resultFragment =
+                GameResultFragment.newInstance(it.gameResult, it.gameDuration, it.gameLvl)
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, resultFragment)
+                commit()
+            }
+        }
+    }
+
+    private fun convertIntToTime(timeInSeconds: Int): String {
+        return String.format("%02d:%02d", timeInSeconds / 60, timeInSeconds % 60)
+    }
+
+    private fun setupBtnClickListeners() {
+        binding.btnMix.setOnClickListener {
+            viewModel.mixGameItems()
+        }
+        binding.btnToStart.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, StartGameFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+        binding.btnSettings.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.mainConteiner, SettingsFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
+    private fun setOnTouchListener() {
+        listOfGameItemViews.map {
+            it.setOnTouchListener(this)
+        }
     }
 }

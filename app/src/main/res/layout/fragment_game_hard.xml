@@ -1,14 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.game.hard.GameHardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/btnToStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        android:src="@drawable/btn_chose_lvl"
+        />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        android:src="@drawable/btn_settings"
+        />
+
+    <TextView
+        android:id="@+id/tvLvlDifficulty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="315:86"
+        app:layout_constraintStart_toEndOf="@id/btnToStart"
+        app:layout_constraintEnd_toStartOf="@id/btnSettings"
+        app:layout_constraintTop_toTopOf="@id/btnToStart"
+        app:layout_constraintTop_toBottomOf="@id/btnToStart"
+        android:layout_marginHorizontal="30dp"
+        style="@style/my_text_style"
+        android:text="@string/hard"
+        android:gravity="center"
+        android:textSize="35dp"
+        android:background="@drawable/btn_red_bckgr"
+        />
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLvlDifficulty"
+        app:layout_constraintBottom_toTopOf="@id/gameField"
+        style="@style/my_text_style"
+        tools:text="00:00"
+        android:gravity="center"
+        android:textSize="35dp"
+        />
+
+    <ImageView
+        android:id="@+id/gameField"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.85"
+        app:layout_constraintDimensionRatio="372:343"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/game_field"
+        />
+
+    <ImageView
+        android:id="@+id/item1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/gameField"
+        app:layout_constraintBottom_toTopOf="@id/item5"
+        app:layout_constraintStart_toStartOf="@id/gameField"
+        app:layout_constraintEnd_toStartOf="@id/item2"
+        android:layout_marginStart="30dp"
+        tools:src="@drawable/item1"
+        />
+
+    <ImageView
+        android:id="@+id/item2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/gameField"
+        app:layout_constraintBottom_toTopOf="@id/item6"
+        app:layout_constraintStart_toEndOf="@id/item1"
+        app:layout_constraintEnd_toStartOf="@id/item3"
+        android:layout_marginStart="30dp"
+        tools:src="@drawable/item3"
+        />
+
+    <ImageView
+        android:id="@+id/item3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/gameField"
+        app:layout_constraintBottom_toTopOf="@id/item7"
+        app:layout_constraintStart_toEndOf="@id/item2"
+        app:layout_constraintEnd_toStartOf="@id/item4"
+        tools:src="@drawable/item6"
+        android:layout_marginStart="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/item4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/gameField"
+        app:layout_constraintBottom_toTopOf="@id/item8"
+        app:layout_constraintStart_toEndOf="@id/item3"
+        app:layout_constraintEnd_toEndOf="@id/gameField"
+        tools:src="@drawable/item6"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/item5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/item1"
+        app:layout_constraintBottom_toBottomOf="@id/gameField"
+        app:layout_constraintStart_toStartOf="@id/gameField"
+        app:layout_constraintEnd_toStartOf="@id/item6"
+        android:layout_marginStart="30dp"
+        tools:src="@drawable/item1"
+        />
+
+    <ImageView
+        android:id="@+id/item6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/item2"
+        app:layout_constraintBottom_toBottomOf="@id/gameField"
+        app:layout_constraintStart_toEndOf="@id/item5"
+        app:layout_constraintEnd_toStartOf="@id/item7"
+        android:layout_marginStart="30dp"
+        tools:src="@drawable/item3"
+        />
+
+    <ImageView
+        android:id="@+id/item7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/item3"
+        app:layout_constraintBottom_toBottomOf="@id/gameField"
+        app:layout_constraintStart_toEndOf="@id/item6"
+        app:layout_constraintEnd_toStartOf="@id/item8"
+        tools:src="@drawable/item6"
+        android:layout_marginStart="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/item8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/item4"
+        app:layout_constraintBottom_toBottomOf="@id/gameField"
+        app:layout_constraintStart_toEndOf="@id/item7"
+        app:layout_constraintEnd_toEndOf="@id/gameField"
+        tools:src="@drawable/item6"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+
+    <TextView
+        android:id="@+id/tvGameHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gameField"
+        style="@style/my_text_style"
+        android:text="@string/remember_the_sequence"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:id="@+id/btnMix"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.75"
+        app:layout_constraintDimensionRatio="298:70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        style="@style/my_text_style"
+        android:text="@string/mix"
+        android:gravity="center"
+        android:textSize="35dp"
+        android:background="@drawable/btn_red_bckgr"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

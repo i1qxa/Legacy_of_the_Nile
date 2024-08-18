@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.game_result.GameResultFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hor50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <ImageView
+        android:id="@+id/btnToStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        android:src="@drawable/btn_chose_lvl"
+        />
+
+    <TextView
+        android:id="@+id/tvResultHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvResult"
+        android:layout_marginBottom="30dp"
+        style="@style/my_text_style"
+        tools:text="@string/congrats"
+        android:gravity="center"
+        android:textSize="55dp"
+        android:background="@drawable/btn_red_bckgr"
+        />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="EASY LVL COMPLETE"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hor50"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        style="@style/my_text_style" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/time"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvTimeValue"
+        android:gravity="center"
+        android:textSize="20dp"
+        style="@style/my_text_style" />
+
+    <TextView
+        android:id="@+id/tvTimeValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="00:35"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hor50"
+        android:gravity="center"
+        android:textSize="40dp"
+        style="@style/my_text_style" />
+
+    <TextView
+        android:id="@+id/btnNextLvl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimeValue"
+        android:layout_marginTop="30dp"
+        style="@style/my_text_style"
+        tools:text="NEXT LEVEL"
+        android:gravity="center"
+        android:textSize="45dp"
+        android:background="@drawable/btn_yellow_bckgr"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

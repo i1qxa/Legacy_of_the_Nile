@@ -10,6 +10,7 @@ import com.Legacy.ofthe.Nile.R
 import com.Legacy.ofthe.Nile.data.PREFS_NAME
 import com.Legacy.ofthe.Nile.data.SOUND_PREFS
 import com.Legacy.ofthe.Nile.data.VOLUME_PREFS
+import com.Legacy.ofthe.Nile.data.isMusicOn
 import com.Legacy.ofthe.Nile.databinding.FragmentSettingsBinding
 import com.Legacy.ofthe.Nile.ui.main.chose_lvl.ChoseLvlFragment
 import com.Legacy.ofthe.Nile.ui.main.start.StartGameFragment
@@ -45,11 +46,13 @@ class SettingsFragment : Fragment() {
         binding.btnVolume.setOnClickListener {
             val isVolumeOn = prefs.getBoolean(VOLUME_PREFS, true)
             prefs.edit().putBoolean(VOLUME_PREFS, !isVolumeOn).apply()
+            isMusicOn.isSoundOn.value = !isVolumeOn
             updateBtnIcons()
         }
         binding.btnSound.setOnClickListener {
             val isSoundOn = prefs.getBoolean(SOUND_PREFS, true)
             prefs.edit().putBoolean(SOUND_PREFS, !isSoundOn).apply()
+            isMusicOn.isMusicOnLD.value = !isSoundOn
             updateBtnIcons()
         }
         binding.btnChoseLvl.setOnClickListener {

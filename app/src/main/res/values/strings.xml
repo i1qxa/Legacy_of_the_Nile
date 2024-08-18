@@ -19,4 +19,14 @@
     <string name="hard">HARD</string>
     <string name="remember_the_sequence">REMEMBER THE SEQUENCE</string>
     <string name="mix">MIX</string>
+    <string name="make_the_right_sequence">MAKE THE RIGHT SEQUENCE</string>
+    <string name="done">DONE</string>
+    <string name="congrats">CONGRATS</string>
+    <string name="time">TIME</string>
+    <string name="level_complete">%1$s LEVEL COMPLETE</string>
+    <string name="next_level">NEXT LEVEL</string>
+    <string name="lose">LOSE</string>
+    <string name="wrong_sequence">WRONG SEQUENCE</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="repeat">REPEAT</string>
 </resources>

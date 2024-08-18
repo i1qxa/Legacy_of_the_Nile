@@ -1,6 +1,7 @@
 package com.Legacy.ofthe.Nile.ui.loading
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -27,6 +28,7 @@ class LoadingActivity : AppCompatActivity() {
         }
         observeLoading()
         observeFinishLoading()
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     private fun observeLoading(){
